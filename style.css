@@ -1,0 +1,218 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 40px;
+}
+
+.search-box {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#searchBtn {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+#results {
+    margin-top: 25px;
+}
+
+#results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.result-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    height: auto; /* remove fixed height */
+    overflow: hidden;
+}
+
+.description {
+    max-height: 80px;              /* Height of truncated version */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: max-height 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;         /* Number of lines when collapsed */
+    -webkit-box-orient: vertical;
+}
+
+.description.expanded {
+    max-height: 1000px;            /* Enough space for full text */
+    -webkit-line-clamp: unset;     
+}
+
+
+.result-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.result-card h3 {
+    margin: 10px 0 5px;
+}
+
+#loading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Modal background */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Modal window */
+.modal-content {
+    background: var(--card-bg);
+    color: var(--text);
+    transition: background 0.4s, color 0.4s;
+    width: 80%;
+    max-width: 950px;
+    padding: 25px;
+    border-radius: 12px;
+    position: relative;
+}
+
+/* Close button */
+#closeModal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+/* Layout inside modal */
+.modal-body {
+    display: flex;
+    gap: 25px;
+}
+
+.modal-body img {
+    width: 260px;
+    border-radius: 10px;
+}
+
+.modal-info {
+    flex: 1;
+    text-align: left;
+}
+
+/*ANIMATIONS FOR NO REASON AT ALL*/
+
+/* Modal hidden by default */
+#animeModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    animation-duration: 0.35s;
+    animation-fill-mode: forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Apply when active */
+.modal-show {
+    animation-name: fadeIn;
+}
+
+/* Fade-out animation */
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.97); }
+}
+
+/* When hiding */
+.modal-hide {
+    animation-name: fadeOut;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, color 0.3s;
+    z-index: 9999;
+}
+
+/* Light + Dark variables */
+:root {
+    --bg: #ffffff;
+    --text: #111111;
+    --card-bg: #f0f0f0;
+}
+
+.dark-mode {
+    --bg: #0f0f0f;
+    --text: #f5f5f5;
+    --card-bg: #1c1c1c;
+}
+
+/* Apply theme */
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s, color 0.4s;
+}
+
+/* If you want cards to auto-theme */
+.result-card {
+    background: var(--card-bg);
+    transition: background 0.4s;
+}

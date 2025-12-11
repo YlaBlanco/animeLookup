@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie / Anime Info Finder</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <h1>Anime Info Finder</h1>
+    <!--Dark Mode button-->
+    <button id="themeToggle" class="theme-toggle">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+
+    <!-- Search Section -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Enter a title...">
+        <button id="searchBtn">Search</button>
+    </div>
+
+
+    <div id="loading" class="hidden">Loading...</div>
+    <div id="pagination" style="margin-top: 20px;"></div>
+
+    <!--Info display-->
+    <div id="results">
+        
+    </div>
+
+    <!-- Results Section -->
+    <div id="results"></div>
+
+    <div id="pagination" style="margin-top: 20px; text-align:center;">
+    <!-- Buttons will be added here by JavaScript -->
+    </div>
+
+    <div id="animeModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal">&times;</span>
+
+        <div class="modal-body">
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p><strong>Score:</strong> <span id="modalScore"></span></p>
+                <p><strong>Episodes:</strong> <span id="modalEpisodes"></span></p>
+                <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+                <p><strong>Genres:</strong> <span id="modalGenres"></span></p>
+                <p id="modalSynopsis"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="app.js"></script>
+</body>
+</html>
+
