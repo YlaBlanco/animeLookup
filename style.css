@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     text-align: center;
     margin: 40px;
 }
@@ -216,3 +216,4 @@ body {
     background: var(--card-bg);
     transition: background 0.4s;
 }
+
