@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <title>Movie / Anime Info Finder</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
 </head>
 <body>
 
-    <h1>Anime Info Finder</h1>
-    <!--Dark Mode button-->
+    <header class="glass-header">
+    <div class="header-left">
+        <h1>Anime Finder</h1>
+    </div>
+
+    <div class="header-right">
+        <input id="searchInput" type="text" placeholder="Enter a title...">
+        <button id="searchBtn">Search</button>
+    </div>
+    </header>
+
+
+
     <button id="themeToggle" class="theme-toggle">
         <span id="themeIcon">🌙</span>
     </button>
-
-
-    <!-- Search Section -->
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Enter a title...">
-        <button id="searchBtn">Search</button>
-    </div>
-
 
     <div id="loading" class="hidden">Loading...</div>
     
@@ -43,23 +45,33 @@
         <span id="closeModal">&times;</span>
 
         <div class="modal-body">
-            <img id="modalImage" src="" alt="">
+
+            <!-- LEFT SIDE: Image + Genre Tags -->
+            <div class="modal-left">
+                <img id="modalImage">
+                <div class="modal-genres" id="modalGenres"></div>
+            </div>
+
+            <!-- RIGHT SIDE: Info -->
             <div class="modal-info">
                 <h2 id="modalTitle"></h2>
-                <p><strong>Score:</strong> <span id="modalScore"></span></p>
-                <p><strong>Episodes:</strong> <span id="modalEpisodes"></span></p>
-                <p><strong>Status:</strong> <span id="modalStatus"></span></p>
-                <p><strong>Genres:</strong> <span id="modalGenres"></span></p>
+
+                <div class="info-line"><strong>Score:</strong> <span id="modalScore"></span></div>
+                <div class="info-line"><strong>Episodes:</strong> <span id="modalEpisodes"></span></div>
+                <div class="info-line"><strong>Status:</strong> <span id="modalStatus"></span></div>
+
+                <h3>Synopsis</h3>
                 <p id="modalSynopsis"></p>
             </div>
+
         </div>
     </div>
 </div>
+
  
     <div id="pagination" style="margin-top: 20px;"></div>
 
     <script src="app.js"></script>
 </body>
 </html>
-
 

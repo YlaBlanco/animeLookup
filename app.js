@@ -104,8 +104,17 @@ function openModal(anime) {
     document.getElementById("modalStatus").textContent = anime.status ?? "Unknown";
 
     // Format genres
-    const genres = anime.genres?.map(g => g.name).join(", ") || "None";
-    document.getElementById("modalGenres").textContent = genres;
+    const genreContainer = document.getElementById("modalGenres");
+    genreContainer.innerHTML = "";
+
+        if (anime.genres && anime.genres.length > 0) {
+            anime.genres.forEach(g => {
+                const tag = document.createElement("span");
+                tag.classList.add("modal-tag");
+                tag.textContent = g.name;
+                genreContainer.appendChild(tag);
+            });
+        }
 
     document.getElementById("modalSynopsis").textContent =
         anime.synopsis || "No description available.";

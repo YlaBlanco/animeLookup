@@ -1,23 +1,80 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
     margin: 40px;
+    background: linear-gradient(to bottom right, #181818, #1f1f1f);
 }
 
-.search-box {
-    margin-bottom: 20px;
+.dark-mode body {
+    background: linear-gradient(to bottom right, #0a0a0a, #151515);
 }
 
+.glass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    padding: 10px 40px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    z-index: 1000;
+}
+
+/* Title */
+.header-left h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Search area */
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* Modern search input */
 #searchInput {
-    width: 250px;
-    padding: 10px;
-    font-size: 16px;
+    padding: 12px 15px;
+    width: 260px;
+
+    border-radius: 8px;
+    border: none;
+    outline: none;
+
+    background: rgba(255,255,255,0.15);
+    color: var(--text);
+
+    backdrop-filter: blur(4px);
+    transition: background 0.3s;
+}
+
+#searchInput::placeholder {
+    color: rgba(255,255,255,0.5);
 }
 
 #searchBtn {
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
     cursor: pointer;
+
+    background: #e509cb;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#searchBtn:hover {
+    background: #b00610;
+    transform: scale(1.05);
 }
 
 
@@ -41,6 +98,14 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     height: auto; /* remove fixed height */
     overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.result-card img {
+    transition: transform 0.3s;
+}
+.result-card:hover img {
+    transform: scale(1.05);
 }
 
 .description {
@@ -65,16 +130,42 @@ body {
     border-radius: 10px;
 }
 
-.result-card h3 {
-    margin: 10px 0 5px;
+.result-card {
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
+
+.result-card:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+
 
 #loading {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
+} /*Not used anymore remove before submitting*/
+
+.spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top-color: var(--text);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 30px auto;
 }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 
 .hidden {
     display: none;
@@ -97,36 +188,80 @@ body {
 
 /* Modal window */
 .modal-content {
-    background: var(--card-bg);
-    color: var(--text);
-    transition: background 0.4s, color 0.4s;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
     width: 80%;
-    max-width: 950px;
-    padding: 25px;
-    border-radius: 12px;
+    max-width: 1200px;
+
+    padding: 35px;
+    border-radius: 18px;
     position: relative;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+
+    animation: modalSlideUp 0.35s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from { transform: translateY(25px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-info h3 {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    opacity: 0.9;
 }
 
 /* Close button */
 #closeModal {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 32px;
+    top: 18px;
+    right: 22px;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
+    font-size: 22px;
+
+    transition: 0.2s;
 }
 
+#closeModal:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.12);
+}
+
+/*Fixes implemented after documentations*/
 /* Layout inside modal */
 .modal-body {
-    display: flex;
-    gap: 25px;
+    display: grid;
+    grid-template-columns: 300px 1fr; /* more breathing room */
+    gap: 40px; /* wider spacing */
+    align-items: start;
 }
 
 .modal-body img {
-    width: 260px;
-    border-radius: 10px;
+    width: 260px;             /* fixed width */
+    height: auto;             /* maintain aspect ratio */
+    object-fit: cover;        /* cleans small ratio issues */
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
 }
-
 .modal-info {
     flex: 1;
     text-align: left;
@@ -147,6 +282,21 @@ body {
     animation-duration: 0.35s;
     animation-fill-mode: forwards;
 }
+
+.modal-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.modal-info .info-line {
+    margin: 8px 0;
+    opacity: 0.9;
+}
+
+.modal-info p {
+    line-height: 1.6;
+}
+
 
 /* Fade-in animation */
 @keyframes fadeIn {
@@ -175,21 +325,33 @@ body {
 /* Theme toggle button */
 .theme-toggle {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--card-bg);
-    border: none;
+    bottom: 25px;
+    left: 25px;
+
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.2);
+
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
+
     cursor: pointer;
     font-size: 1.5rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background 0.3s, color 0.3s;
-    z-index: 9999;
+
+    transition: 0.3s;
+    z-index: 99999;
 }
+
+.theme-toggle:hover {
+    transform: scale(1.15);
+    background: rgba(255,255,255,0.2);
+}
+
 
 /* Light + Dark variables */
 :root {
@@ -217,3 +379,76 @@ body {
     transition: background 0.4s;
 }
 
+
+/* Light Mode Glass Fix : this is broken because the glass is the same shade as the theme*/
+body:not(.dark-mode) .glass-header {
+    background: rgba(255,255,255,0.6);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+body:not(.dark-mode) #searchInput {
+    background: rgba(0,0,0,0.05);
+    color: #111;
+}
+
+body:not(.dark-mode) #searchInput::placeholder {
+    color: rgba(0,0,0,0.5);
+}
+
+body:not(.dark-mode) #searchBtn {
+    background: #e50914;
+    color: white;
+}
+
+
+.modal-genres {
+    margin: 10px 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.modal-tag {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+
+    border-radius: 50px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--text);
+
+    transition: transform 0.25s ease;
+}
+
+.modal-tag:hover {
+    transform: scale(1.08);
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
+}
+
+.modal-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modalImage {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.modal-genres {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
