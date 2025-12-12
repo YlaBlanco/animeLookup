@@ -1,4 +1,68 @@
-<link rel="stylesheet" href="style.css">
-<script src="app.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Anime Finder</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
+    <!--  HEADER  -->
+    <header class="glass-header">
+        <div class="header-left">
+            <h1>Anime Finder</h1>
+        </div>
 
+        <div class="header-right">
+            <input id="searchInput" type="text" placeholder="Enter a title..." />
+            <button id="searchBtn">Search</button>
+        </div>
+    </header>
+
+    <!--  THEME TOGGLE  -->
+    <button id="themeToggle" class="theme-toggle">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <!--  LOADING  -->
+    <div id="loading" class="hidden">Loading...</div>
+
+    <!--  RESULTS GRID  -->
+    <div id="results"></div>
+
+    <!--  PAGINATION  -->
+    <div id="pagination" style="margin-top: 20px; text-align:center;"></div>
+
+    <!--  MODAL  -->
+    <div id="animeModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+
+            <div class="modal-body">
+
+                <!-- LEFT SIDE -->
+                <div class="modal-left">
+                    <img id="modalImage" />
+                    <div class="modal-genres" id="modalGenres"></div>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+
+                    <div class="info-line"><strong>Score:</strong> <span id="modalScore"></span></div>
+                    <div class="info-line"><strong>Episodes:</strong> <span id="modalEpisodes"></span></div>
+                    <div class="info-line"><strong>Status:</strong> <span id="modalStatus"></span></div>
+
+                    <h3>Synopsis</h3>
+                    <p id="modalSynopsis"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

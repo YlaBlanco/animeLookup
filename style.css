@@ -1,0 +1,346 @@
+/* ---------------------------------------------------------
+# GLOBAL & THEME VARIABLES
+--------------------------------------------------------- */
+/* Default Light Mode */
+:root {
+    --bg1: #ffffff;
+    --bg2: #e6e6e6;
+    --text: #111;
+    --card-bg: rgba(255,255,255,0.6);
+}
+
+/* Dark Mode */
+.dark-mode {
+    --bg1: #181818;
+    --bg2: #1f1f1f;
+    --text: #f5f5f5;
+    --card-bg: rgba(255,255,255,0.06);
+}
+
+
+/* GLOBAL BODY */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 40px;
+    background: linear-gradient(to bottom right, var(--bg1), var(--bg2));
+    color: var(--text);
+    transition: background 0.4s, color 0.4s;
+    color: var(--text);
+    transition: 0.4s background, 0.4s color;
+}
+
+.dark-mode body {
+    background: linear-gradient(to bottom right, #0a0a0a, #151515);
+}
+
+/* ---------------------------------------------------------
+# GLASS HEADER NAVBAR
+--------------------------------------------------------- */
+.glass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    padding: 10px 40px;
+
+    background: var(--glass-dark-bg);
+    border-bottom: 1px solid var(--glass-dark-border);
+    backdrop-filter: blur(12px);
+
+    z-index: 1000;
+}
+
+body:not(.dark-mode) .glass-header {
+    background: rgba(255,255,255,0.6);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* ---------------------------------------------------------
+# SEARCH BAR
+--------------------------------------------------------- */
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+#searchInput {
+    padding: 12px 15px;
+    width: 260px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    color: var(--text);
+    transition: background 0.3s;
+}
+
+#searchInput::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+body:not(.dark-mode) #searchInput {
+    background: rgba(0,0,0,0.05);
+    color: #111;
+}
+body:not(.dark-mode) #searchInput::placeholder {
+    color: rgba(0,0,0,0.5);
+}
+
+#searchBtn {
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: rgb(12, 147, 201);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    transition: 0.3s;
+}
+#searchBtn:hover {
+    background: var(--accent-dark);
+    transform: scale(1.05);
+}
+
+/* ---------------------------------------------------------
+# RESULT GRID / ANIME CARDS
+--------------------------------------------------------- */
+#results {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+/* Card appearance (Netflix-style posters) */
+.result-card {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.result-card img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.result-card:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+/* ---------------------------------------------------------
+# MODAL — OVERLAY BACKGROUND
+--------------------------------------------------------- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* ---------------------------------------------------------
+# MODAL — CONTENT BOX
+--------------------------------------------------------- */
+.modal-content {
+    width: 80%;
+    max-width: 1200px;
+
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+
+    padding: 35px;
+    border-radius: 18px;
+    position: relative;
+
+    animation: modalSlideUp 0.35s ease-out;
+}
+
+/* Slide-up animation */
+@keyframes modalSlideUp {
+    from { transform: translateY(25px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------------------------------------------------------
+# MODAL CLOSE BUTTON
+--------------------------------------------------------- */
+#closeModal {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    font-size: 22px;
+    transition: 0.2s;
+}
+#closeModal:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.12);
+}
+
+/* ---------------------------------------------------------
+# MODAL LAYOUT
+--------------------------------------------------------- */
+.modal-body {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
+}
+
+.modal-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modalImage {
+    width: 100%;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* ---------------------------------------------------------
+# GENRE TAGS INSIDE MODAL
+--------------------------------------------------------- */
+.modal-genres {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-tag {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(6px);
+
+    color: var(--text);
+    transition: transform 0.25s ease;
+}
+.modal-tag:hover {
+    transform: scale(1.08);
+}
+
+/* ---------------------------------------------------------
+# MODAL TEXT CONTENT
+--------------------------------------------------------- */
+.modal-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.modal-info h3 {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.modal-info .info-line {
+    margin: 8px 0;
+    opacity: 0.9;
+}
+
+.modal-info p {
+    line-height: 1.6;
+}
+
+/* ---------------------------------------------------------
+# MODAL FADE IN / OUT
+--------------------------------------------------------- */
+#animeModal {
+    opacity: 0;
+    animation-duration: 0.35s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.97); }
+}
+
+.modal-show {
+    animation-name: fadeIn;
+}
+.modal-hide {
+    animation-name: fadeOut;
+    animation-duration: 0.3s;
+}
+
+/* ---------------------------------------------------------
+# THEME TOGGLE BUTTON (FLOATING)
+--------------------------------------------------------- */
+.theme-toggle {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: 0.3s;
+    z-index: 9999;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.15);
+    background: rgba(255,255,255,0.2);
+}
+
+/* ---------------------------------------------------------
+# UTILITY CLASSES
+--------------------------------------------------------- */
+.hidden {
+    display: none;
+}
