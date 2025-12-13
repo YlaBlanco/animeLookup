@@ -44,13 +44,23 @@ body {
 
     position: sticky;
     top: 0;
-    padding: 10px 40px;
+    padding: 14px 40px;
 
-    background: var(--glass-dark-bg);
-    border-bottom: 1px solid var(--glass-dark-border);
-    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.08);
 
     z-index: 1000;
+}
+
+.dark-mode .glass-header {
+    background: rgba(20,20,20,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.5);
 }
 
 body:not(.dark-mode) .glass-header {
@@ -66,22 +76,60 @@ body:not(.dark-mode) .glass-header {
 /* ---------------------------------------------------------
 # SEARCH BAR
 --------------------------------------------------------- */
-.header-right {
-    display: flex;
-    gap: 10px;
+
+.header-left h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+
+    background: linear-gradient(
+        90deg,
+        #0c93c9,
+        #5cc9ff
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-#searchInput {
-    padding: 12px 15px;
-    width: 260px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    color: var(--text);
-    transition: background 0.3s;
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 6px;
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.25);
 }
+
+body:not(.dark-mode) .header-right {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.12);
+}
+
+
+#searchInput {
+    padding: 12px 16px;
+    width: 260px;
+    border-radius: 10px;
+    border: none;
+
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+
+    font-size: 0.95rem;
+}
+
+#searchInput:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(12,147,201,0.4);
+}
+
 
 #searchInput::placeholder {
     color: rgba(255,255,255,0.5);
@@ -149,12 +197,20 @@ body:not(.dark-mode) #searchInput::placeholder {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(5px);
+
+    background: rgba(0,0,0,0.75); /* default = dark mode */
+    backdrop-filter: blur(6px);
+
     justify-content: center;
     align-items: center;
     z-index: 999;
 }
+
+/* LIGHT MODE overlay */
+body:not(.dark-mode) .modal {
+    background: rgba(255,255,255,0.55);
+}
+
 
 /* ---------------------------------------------------------
 # MODAL — CONTENT BOX
