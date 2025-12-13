@@ -12,11 +12,43 @@
         <div class="header-left">
             <h1>Anime Finder</h1>
         </div>
+        <div class="header-center">
+            <button class="tab active" data-tab="top">Top</button>
+            <button class="tab" data-tab="airing">Airing</button>
+            <button class="tab" data-tab="season">Season</button>
+            <button class="tab" data-tab="genre">Genre</button>
+        </div>
 
+        <div class="header-filters">
+        <!-- Season -->
+            <select id="seasonSelect">
+                <option value="winter">Winter</option>
+                <option value="spring">Spring</option>
+                <option value="summer">Summer</option>
+                <option value="fall">Fall</option>
+            </select>
+
+            <!-- Year -->
+            <select id="yearSelect"></select>
+
+            <!-- Genre -->
+            <select id="genreSelect">
+                <option value="1">Action</option>
+                <option value="2">Adventure</option>
+                <option value="4">Comedy</option>
+                <option value="8">Drama</option>
+                <option value="10">Fantasy</option>
+                <option value="14">Horror</option>
+                <option value="22">Romance</option>
+                <option value="24">Sci-Fi</option>
+            </select>
+        </div>
+        
         <div class="header-right">
             <input id="searchInput" type="text" placeholder="Enter a title..." />
             <button id="searchBtn">Search</button>
         </div>
+
     </header>
 
     <!--  THEME TOGGLE  -->
